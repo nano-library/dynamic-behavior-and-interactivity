@@ -5,7 +5,7 @@ document.querySelectorAll('.example').forEach(card => {
 
   solution.style.overflow   = 'hidden';
   solution.style.maxHeight  = '0';
-  solution.style.transition = 'max-height 0.4s cubic-bezier(0.4,0,0.2,1)';
+  solution.style.transition = 'max-height 0.6s cubic-bezier(0.4,0,0.2,1)';
 
   header.style.cursor  = 'pointer';
   problem.style.cursor = 'pointer';
@@ -17,13 +17,11 @@ document.querySelectorAll('.example').forEach(card => {
     open = !open;
 
     if (open) {
-      solution.style.maxHeight = solution.scrollHeight + 'px';
+      solution.style.maxHeight = '9999px';
 
       if (!typeset && window.MathJax) {
         typeset = true;
-        MathJax.typesetPromise([card]).then(() => {
-          solution.style.maxHeight = solution.scrollHeight + 'px';
-        });
+        MathJax.typesetPromise([card]);
       }
     } else {
       solution.style.maxHeight = '0';
