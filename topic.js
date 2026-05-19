@@ -1,3 +1,27 @@
+window.MathJax = {
+  startup: { typeset: false }
+};
+
+const mjScript = document.createElement('script');
+mjScript.src = 'https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js';
+mjScript.id = 'MathJax-script';
+document.head.appendChild(mjScript);
+
+mjScript.onload = () => {
+  MathJax.startup.promise.then(() => {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          MathJax.typesetPromise([entry.target]);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { rootMargin: '200px' });
+
+    document.querySelectorAll('.formula-card').forEach(el => observer.observe(el));
+  });
+};
+
 async function initProgress() {
 	const page = document.querySelector('[data-topic]');
 	if (!page) return;
@@ -156,3 +180,4 @@ function initFormulaNumber() {
 	});
 }
 document.addEventListener('DOMContentLoaded', initFormulaNumber);
+
