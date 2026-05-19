@@ -1,4 +1,4 @@
-window.MathJax = {
+/*window.MathJax = {
   startup: { typeset: false }
 };
 
@@ -21,6 +21,7 @@ mjScript.onload = () => {
     document.querySelectorAll('.formula-card').forEach(el => observer.observe(el));
   });
 };
+*/
 
 async function initProgress() {
 	const page = document.querySelector('[data-topic]');
